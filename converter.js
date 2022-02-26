@@ -21,24 +21,25 @@ const app = {
         "M": 1000
     },
 
-    converter : (romanNumber) => {
+    converter : (romanNum) => {
         
-        caractersArray = romanNumber.split('');
+        const caractersArray = romanNum.split('');
 
-        let convertedNumber = 0;
+        let arabicNum = 0;
 
         for (const caracter of caractersArray) {
             for (const index in app.romanNumbers) {
                 if (caracter === index) {
-                    //! il faut un verifier ici que convertedNumber est de la forme n+1 avec n un multiple de 10
-                    if (convertedNumber === 1 && index === 'V') {
-                        convertedNumber = app.romanNumbers[index] - convertedNumber;
+                    console.log('arabicNum === ', arabicNum);
+                    //! il faut un verifier ici que arabicNum est de la forme n+1 avec n un multiple de 10
+                    if (arabicNum === 1 && index === 'V') {
+                        arabicNum = app.romanNumbers[index] - arabicNum;
                     }
-                    else if (convertedNumber === 1 && index === 'X') {
-                        convertedNumber = app.romanNumbers[index] - convertedNumber;
+                    else if (arabicNum === 1 && index === 'X') {
+                        arabicNum = app.romanNumbers[index] - arabicNum;
                     }
                     else {
-                        convertedNumber += app.romanNumbers[index];
+                        arabicNum += app.romanNumbers[index];
                     }
                     
                     console.log('app.romanNumbers[index] : ', app.romanNumbers[index]);
@@ -46,7 +47,7 @@ const app = {
             }
         }
 
-        return convertedNumber;
+        return arabicNum;
 
     }
 }
