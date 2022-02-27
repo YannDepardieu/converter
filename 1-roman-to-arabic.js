@@ -19,8 +19,9 @@ const romanNumTestArray2 = ['XL', 'XLI', 'XLII', 'XLIII', 'XLIV', 'XLV', 'XLVI',
 'LIII', 'LIV', 'LV', 'LVI', 'LVII', 'LVIII', 'LIX', 'LX', 'LXI'];
 
 const romanNumTestArray3 = ['LXXXIX', 'XC', 'XCI', 'XCII', 'XCIII', 'XCIV', 'XCV', 'XCVI', 'XCVII', 'XCVIII', 'XCIX', 'C',
-'CI', 'CIV', 'CV', 'CVI', 'CIX', 'CX', 'CXI'];
+'CI', 'CIV', 'CV', 'CVI', 'CIX', 'CX', 'CXI', 'CXLIV'];
 
+const romanNumTestArray4 = ['CD', 'CDXLIV', 'CDXCIX', 'DCCLI', 'CM', 'MC', 'MMCXLIII'];
 
 const app = {
     romanNumbers : {
@@ -49,24 +50,24 @@ const app = {
                         arabicNum += app.romanNumbers[index] - 2;
                     }
                     else if (  (arabicNum - 1) % 10 === 0  &&  index === 'X' ) {
-                        // console.log('arabicNumBefore === ', arabicNum);
                         arabicNum += app.romanNumbers[index] - 2;
                     }
                     else if (  (arabicNum - 10) % 100 === 0  &&  index === 'L' ) {
-                        console.log('iciiii');
-                        // console.log('arabicNumBefore === ', arabicNum);
                         arabicNum += app.romanNumbers[index] - 20;
                     }
                     else if (  (arabicNum - 10) % 100 === 0  &&  index === 'C' ) {
-                        console.log('iciiii');
-                        // console.log('arabicNumBefore === ', arabicNum);
                         arabicNum += app.romanNumbers[index] - 20;
+                    }
+                    else if (  (arabicNum - 100) % 1000 === 0  &&  index === 'D' ) {
+                        arabicNum += app.romanNumbers[index] - 200;
+                    }
+                    else if (  (arabicNum - 100) % 1000 === 0  &&  index === 'M' ) {
+                        arabicNum += app.romanNumbers[index] - 200;
                     }
                     else {
                         arabicNum += app.romanNumbers[index];
                         console.log('arabicNum === ', arabicNum);
                     }
-                    //console.log('app.romanNumbers[index] : ', app.romanNumbers[index]);
                 }
             }
 
@@ -78,7 +79,7 @@ const app = {
 
 const result = {};
 
-for (const num of romanNumTestArray3) {
+for (const num of romanNumTestArray4) {
     console.log(`##################################  ${num}  #####################################`)
     result[num] = app.converter(num);
 }
