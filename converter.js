@@ -10,6 +10,18 @@ VIII -> 8
 IX -> 9
 X -> 10
 */
+
+const romanNumTestArray = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI',
+'XVII', 'XVIII', 'XIX', 'XX', 'XXI', 'XXII', 'XXIII', 'XXIV', 'XXV', 'XXVI', 'XXVII', 'XXVIII', 'XXIX', 'XXX', 'XXXI', 'XXXII', 
+'XXXIII', 'XXXIV', 'XXXV', 'XXXVI', 'XXXVII', 'XXXVIII', 'XXXIX'];
+
+const romanNumTestArray2 = ['XL', 'XLI', 'XLII', 'XLIII', 'XLIV', 'XLV', 'XLVI', 'XLVII', 'XLVIII', 'XLIX', 'L', 'LI', 'LII',
+'LIII', 'LIV', 'LV', 'LVI', 'LVII', 'LVIII', 'LIX', 'LX', 'LXI'];
+
+const romanNumTestArray3 = ['LXXXIX', 'XC', 'XCI', 'XCII', 'XCIII', 'XCIV', 'XCV', 'XCVI', 'XCVII', 'XCVIII', 'XCIX', 'C',
+'CI', 'CIV', 'CV', 'CVI', 'CIX', 'CX', 'CXI'];
+
+
 const app = {
     romanNumbers : {
         "I": 1,
@@ -28,28 +40,47 @@ const app = {
         let arabicNum = 0;
 
         for (const caracter of caractersArray) {
+
             for (const index in app.romanNumbers) {
                 if (caracter === index) {
-                    console.log('arabicNum === ', arabicNum);
+                    console.log('index === ', index);
                     //! il faut un verifier ici que arabicNum est de la forme n+1 avec n un multiple de 10
-                    if (arabicNum === 1 && index === 'V') {
-                        arabicNum = app.romanNumbers[index] - arabicNum;
+                    if ( (arabicNum - 1) % 10 === 0  && index === 'V' ) {
+                        arabicNum += app.romanNumbers[index] - 2;
                     }
-                    else if (arabicNum === 1 && index === 'X') {
-                        arabicNum = app.romanNumbers[index] - arabicNum;
+                    else if (  (arabicNum - 1) % 10 === 0  &&  index === 'X' ) {
+                        // console.log('arabicNumBefore === ', arabicNum);
+                        arabicNum += app.romanNumbers[index] - 2;
+                    }
+                    else if (  (arabicNum - 10) % 100 === 0  &&  index === 'L' ) {
+                        console.log('iciiii');
+                        // console.log('arabicNumBefore === ', arabicNum);
+                        arabicNum += app.romanNumbers[index] - 20;
+                    }
+                    else if (  (arabicNum - 10) % 100 === 0  &&  index === 'C' ) {
+                        console.log('iciiii');
+                        // console.log('arabicNumBefore === ', arabicNum);
+                        arabicNum += app.romanNumbers[index] - 20;
                     }
                     else {
                         arabicNum += app.romanNumbers[index];
+                        console.log('arabicNum === ', arabicNum);
                     }
-                    
-                    console.log('app.romanNumbers[index] : ', app.romanNumbers[index]);
+                    //console.log('app.romanNumbers[index] : ', app.romanNumbers[index]);
                 }
             }
+
         }
 
         return arabicNum;
-
     }
 }
 
-console.log(app.converter('XIV'));
+const result = {};
+
+for (const num of romanNumTestArray3) {
+    console.log(`##################################  ${num}  #####################################`)
+    result[num] = app.converter(num);
+}
+
+console.table(result);
