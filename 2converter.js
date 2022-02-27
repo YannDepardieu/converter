@@ -14,7 +14,7 @@ X -> 10
 const romanNumTestArray = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI',
 'XVII', 'XVIII', 'XIX', 'XX', 'XXI', 'XXII', 'XXIII', 'XXIV', 'XXV', 'XXVI', 'XXVII', 'XXVIII', 'XXIX', 'XXX', 'XXXI'];
 
-const romanNumTestArray2 = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+const romanNumTestArray2 = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
 
 
 const app = {
@@ -40,15 +40,14 @@ const app = {
                 if (caracter === index) {
                     console.log('index === ', index);
                     //! il faut un verifier ici que arabicNum est de la forme n+1 avec n un multiple de 10
-                    if (  arabicNum !== 1 &&  (arabicNum - 1) % 10 === 0  ) {
+                    if ( (arabicNum - 1) % 10 === 0  && index === 'V' ) {
+                        arabicNum += app.romanNumbers[index] - 2;
+                    }
+                    // else if (  arabicNum === 1 &&  (arabicNum - 1) % 10 === 0  &&  index === 'X') {
+                    else if (  (arabicNum - 1) % 10 === 0  &&  index === 'X' ) {
                         console.log('iciiii');
                         // console.log('arabicNumBefore === ', arabicNum);
-                        if (index === 'V') {
-                            arabicNum += app.romanNumbers[index] - 2;
-                        }
-                        else if (index === 'X') {
-                            arabicNum += app.romanNumbers[index] - 2;
-                        }
+                        arabicNum += app.romanNumbers[index] - 2;
                     }
                     else {
                         arabicNum += app.romanNumbers[index];
@@ -67,7 +66,7 @@ const app = {
 
 const result = {};
 
-for (const num of romanNumTestArray2) {
+for (const num of romanNumTestArray) {
     console.log(`##################################  ${num}  #####################################`)
     result[num] = app.converter(num);
 }
